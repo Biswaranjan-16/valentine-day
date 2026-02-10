@@ -1,0 +1,240 @@
+<!-- Ethereal Loading Experience -->
+<div class="ethereal-loader" *ngIf="!showContent">
+  <div class="loader-constellation">
+    <div class="constellation-heart">
+      <div class="heart-particle"></div>
+      <div class="heart-particle"></div>
+      <div class="heart-particle"></div>
+    </div>
+    <p class="loading-whisper">Weaving love into pixels...</p>
+  </div>
+</div>
+
+<!-- Main Valentine Experience -->
+<div class="valentine-canvas" *ngIf="showContent" @fadeInStagger>
+  
+  <!-- Enchanted Background -->
+  <div class="enchanted-backdrop">
+    <!-- Falling Rose Petals -->
+    <div class="petal-fall">
+      <div class="rose-petal" 
+           *ngFor="let petal of petals"
+           [style.animation-delay]="petal.delay + 's'"
+           [style.animation-duration]="petal.duration + 's'"
+           [style.left.%]="petal.left">
+        🌸
+      </div>
+    </div>
+    
+    <!-- Twinkling Stars -->
+    <div class="star-field">
+      <div class="star" 
+           *ngFor="let star of stars"
+           [style.top.%]="star.top"
+           [style.left.%]="star.left"
+           [style.width.px]="star.size"
+           [style.height.px]="star.size"
+           [style.animation-delay]="star.delay + 's'">
+      </div>
+    </div>
+    
+    <!-- Art Nouveau Ornaments -->
+    <svg class="art-nouveau-corner top-left" viewBox="0 0 200 200">
+      <path d="M0,0 Q50,50 0,100 Q50,75 100,100 Q75,50 100,0 Z" 
+            fill="url(#gradient1)" opacity="0.15"/>
+      <defs>
+        <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#d946a6" />
+          <stop offset="100%" stop-color="#ec4899" />
+        </linearGradient>
+      </defs>
+    </svg>
+    
+    <svg class="art-nouveau-corner bottom-right" viewBox="0 0 200 200">
+      <path d="M200,200 Q150,150 200,100 Q150,125 100,100 Q125,150 100,200 Z" 
+            fill="url(#gradient2)" opacity="0.15"/>
+      <defs>
+        <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ec4899" />
+          <stop offset="100%" stop-color="#d946a6" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <!-- Hero Section with Spectacular Heart -->
+  <section class="hero-section stagger-item" @floatIn>
+    <div class="parallax-element" data-speed="0.3">
+      <div class="hero-heart-container">
+        <div class="heart-glow-ring"></div>
+        <div class="hero-heart" 
+             [@heartPulse]="heartState" 
+             (click)="createHeartBurst($event)"
+             title="Click me for a surprise! 💕">
+          ❤️
+        </div>
+      </div>
+    </div>
+    
+    <h1 class="romantic-title">
+      <span class="title-line line-1">Love</span>
+      <span class="title-line line-2">Beyond</span>
+      <span class="title-line line-3">Words</span>
+    </h1>
+    
+    <div class="subtitle-ornament">
+      <div class="ornament-left">❦</div>
+      <p class="hero-subtitle">A Valentine's Journey Through Time & Emotion</p>
+      <div class="ornament-right">❦</div>
+    </div>
+  </section>
+
+  <!-- Romantic Quote Carousel -->
+  <section class="quote-sanctuary stagger-item">
+    <div class="quote-frame">
+      <div class="quote-content">
+        <p class="quote-text">"{{ currentQuote.text }}"</p>
+        <p class="quote-author">— {{ currentQuote.author }}</p>
+      </div>
+      <div class="quote-flourish left-flourish">❧</div>
+      <div class="quote-flourish right-flourish">❧</div>
+    </div>
+  </section>
+
+  <!-- Enhanced Memory Timeline -->
+  <section class="memory-timeline stagger-item">
+    <h2 class="section-title">
+      <span class="title-accent">✧</span>
+      Moments We Treasure
+      <span class="title-accent">✧</span>
+    </h2>
+    
+    <div class="timeline-container">
+      <div class="timeline-path">
+        <svg class="path-line" viewBox="0 0 4 400" preserveAspectRatio="none">
+          <path d="M2,0 Q1,200 2,400" stroke="url(#timelineGradient)" 
+                stroke-width="2" fill="none" stroke-dasharray="8,4"/>
+          <defs>
+            <linearGradient id="timelineGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#d946a6" stop-opacity="0.3" />
+              <stop offset="50%" stop-color="#ec4899" stop-opacity="0.8" />
+              <stop offset="100%" stop-color="#d946a6" stop-opacity="0.3" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      
+      <!-- Enhanced Memory Cards with Vintage Postcard Design -->
+      <div class="memory-card" 
+           *ngFor="let memory of memories; let i = index" 
+           [class.left]="i % 2 === 0" 
+           [class.right]="i % 2 === 1">
+        <div class="memory-icon" (click)="createHeartBurst($event)">
+          {{ memory.icon }}
+        </div>
+        <div class="memory-details">
+          <h3 class="memory-title">{{ memory.title }}</h3>
+          <p class="memory-date">{{ memory.date }}</p>
+          <p class="memory-note">{{ memory.note }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sealed Love Letter -->
+  <section class="letter-section stagger-item">
+    <div class="envelope-container">
+      <div class="wax-seal-top">
+        <div class="seal-stamp">💝</div>
+      </div>
+      
+      <div class="letter-paper">
+        <div class="paper-texture"></div>
+        
+        <div class="letter-header">
+          <h2 class="letter-greeting">My Dearest Love,</h2>
+          <div class="ink-flourish"></div>
+        </div>
+        
+        <div class="letter-body">
+          <p class="letter-paragraph calligraphy">
+            In the quiet moments between heartbeats, in the space where dreams 
+            and reality intertwine, I find you. You are the poetry I never learned 
+            to write, the melody I never knew I needed.
+          </p>
+          
+          <p class="letter-paragraph calligraphy">
+            Every sunrise holds the promise of your smile, every sunset carries 
+            the warmth of your presence. Time itself seems to pause when you're near, 
+            as if the universe conspires to give us just one more moment together.
+          </p>
+          
+          <p class="letter-paragraph calligraphy">
+            This Valentine's Day, and every day after, know that you are cherished 
+            beyond measure, loved beyond words, and treasured beyond time.
+          </p>
+          
+          <div class="letter-signature">
+            <p class="signature-line">Forever and always,</p>
+            <p class="signature-name">Your Eternal Valentine</p>
+            <div class="signature-hearts">
+              <span>♥</span><span>♥</span><span>♥</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <button class="reveal-button" (click)="onRevealLetter()">
+        <span class="button-text">Unfold Our Story</span>
+        <span class="button-icon">✉️</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Interactive Heart Garden -->
+  <section class="heart-garden stagger-item">
+    <h2 class="section-title">
+      <span class="title-accent">✿</span>
+      Garden of Affection
+      <span class="title-accent">✿</span>
+    </h2>
+    
+    <div class="garden-bed">
+      <div class="heart-flower" (click)="createHeartBurst($event)">
+        <div class="flower-stem"></div>
+        <div class="flower-bloom">🌹</div>
+      </div>
+      <div class="heart-flower" (click)="createHeartBurst($event)" style="animation-delay: 0.3s;">
+        <div class="flower-stem"></div>
+        <div class="flower-bloom">💐</div>
+      </div>
+      <div class="heart-flower" (click)="createHeartBurst($event)" style="animation-delay: 0.6s;">
+        <div class="flower-stem"></div>
+        <div class="flower-bloom">🌺</div>
+      </div>
+      <div class="heart-flower" (click)="createHeartBurst($event)" style="animation-delay: 0.9s;">
+        <div class="flower-stem"></div>
+        <div class="flower-bloom">🌷</div>
+      </div>
+      <div class="heart-flower" (click)="createHeartBurst($event)" style="animation-delay: 1.2s;">
+        <div class="flower-stem"></div>
+        <div class="flower-bloom">🌻</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer with Romantic Touch -->
+  <footer class="romantic-footer">
+    <div class="footer-ornament">
+      <div class="ornament-pattern">✺ ❀ ✺</div>
+    </div>
+    <p class="footer-text">Handcrafted with devotion & tenderness</p>
+    <p class="footer-year">Valentine's Day {{ currentYear }}</p>
+    <div class="footer-hearts">
+      <span class="footer-heart">♡</span>
+      <span class="footer-heart">♡</span>
+      <span class="footer-heart">♡</span>
+    </div>
+  </footer>
+
+</div>
